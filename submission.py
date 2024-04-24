@@ -1,9 +1,3 @@
-'''
-Licensing Information: Please do not distribute or publish solutions to this
-project. You are free to use and extend Driverless Car for educational
-purposes. The Driverless Car project was developed at Stanford, primarily by
-Chris Piech (piech@cs.stanford.edu). It was inspired by the Pacman projects.
-'''
 from engine.const import Const
 import util, math, random, collections
 
@@ -11,6 +5,7 @@ import util, math, random, collections
 # ---------------------
 # Maintain and update a belief distribution over the probability of a car
 # being in a tile using exact updates (correct, but slow times).
+
 class ExactInference(object):
 
     # Function: Init
@@ -26,7 +21,7 @@ class ExactInference(object):
 
 
     ##################################################################################
-    # Problem 2:
+ 
     # Function: Observe (update the probabilities based on an observation)
     # -----------------
     # Takes |self.belief| -- an object of class Belief, defined in util.py --
@@ -38,10 +33,7 @@ class ExactInference(object):
     # - observedDist: true distance plus a mean-zero Gaussian with standard
     #                 deviation Const.SONAR_STD
     #
-    # Notes:
-    # - Convert row and col indices into locations using util.rowToY and util.colToX.
-    # - util.pdf: computes the probability density function for a Gaussian
-    # - Don't forget to normalize self.belief after you update its probabilities!
+
     ##################################################################################
 
     def observe(self, agentX, agentY, observedDist):
@@ -50,22 +42,11 @@ class ExactInference(object):
         # END_YOUR_CODE
 
     ##################################################################################
-    # Problem 3:
+
     # Function: Elapse Time (propose a new belief distribution based on a learned transition model)
     # ---------------------
     # Takes |self.belief| and updates it based on the passing of one time step.
-    # Notes:
-    # - Use the transition probabilities in self.transProb, which is a dictionary
-    #   containing all the ((oldTile, newTile), transProb) key-val pairs that you
-    #   must consider.
-    # - If there are ((oldTile, newTile), transProb) pairs not in self.transProb,
-    #   they are assumed to have zero probability, and you can safely ignore them.
-    # - Use the addProb and getProb methods of the Belief class to access and modify
-    #   the probabilities associated with a belief.  (See util.py.)
-    # - Be careful that you are using only the CURRENT self.belief distribution to compute
-    #   updated beliefs.  Don't incrementally update self.belief and use the updated value
-    #   for one grid square to compute the update for another square.
-    # - Don't forget to normalize self.belief after all probabilities have been updated!
+
     ##################################################################################
     def elapseTime(self):
         if self.skipElapse: return ### ONLY FOR THE GRADER TO USE IN Problem 2
@@ -155,13 +136,7 @@ class ParticleFilter(object):
     # - agentY: y location of your car (not the one you are tracking)
     # - observedDist: true distance plus a mean-zero Gaussian with standard deviation Const.SONAR_STD
     #
-    # Notes:
-    # - Remember that |self.particles| is a dictionary with keys in the form of
-    #   (row, col) grid locations and values representing the number of particles at
-    #   that grid square.
-    # - Create |self.NUM_PARTICLES| new particles during resampling.
-    # - To pass the grader, you must call util.weightedRandomChoice() once per new
-    #   particle.  See util.py for the definition of weightedRandomChoice().
+
     ##################################################################################
     def observe(self, agentX, agentY, observedDist):
         # BEGIN_YOUR_CODE (our solution is 10 lines of code, but don't worry if you deviate from this)
@@ -184,14 +159,7 @@ class ParticleFilter(object):
     #             to sample again to see where each particle would end up using
     #             the transition model.
     #
-    # Notes:
-    # - Transition probabilities are stored in |self.transProbDict|.
-    # - To pass the grader, you must loop over the particles using a statement
-    #   of the form 'for tile in self.particles: <your code>' and call
-    #   util.weightedRandomChoice() to sample a new particle location.
-    # - Remember that if there are multiple particles at a particular location,
-    #   you will need to call util.weightedRandomChoice() once for each of them!
-    # - You should NOT call self.updateBelief() at the end of this function.
+ 
     ##################################################################################
     def elapseTime(self):
         # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
